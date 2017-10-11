@@ -9,6 +9,7 @@ use Shop\Product\Command\CreateProduct;
 use Shop\Product\Event\ProductCreated;
 use Shop\Product\ProductCommandHandler;
 use Shop\Product\Repository;
+use Shop\Product\ValueObject\ProductId;
 
 class CreateProductTest extends CommandHandlerScenarioTestCase
 {
@@ -18,7 +19,7 @@ class CreateProductTest extends CommandHandlerScenarioTestCase
     public function should_create_a_product()
     {
         $createProduct = new CreateProduct(
-            '00000000-0000-0000-0000-000000000321',
+            new ProductId('00000000-0000-0000-0000-000000000321'),
             '5707055029608',
             'Nome prodotto: Scaaarpe',
             'http://static.politifact.com.s3.amazonaws.com/subjects/mugs/fake.png',

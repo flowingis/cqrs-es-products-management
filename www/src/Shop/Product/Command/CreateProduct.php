@@ -2,6 +2,8 @@
 
 namespace Shop\Product\Command;
 
+use Shop\Product\ValueObject\ProductId;
+
 class CreateProduct
 {
     private $productId;
@@ -15,7 +17,7 @@ class CreateProduct
      */
     private $createdAt;
 
-    public function __construct($productId, $barcode, $name, $imageUrl, $brand, \DateTimeImmutable $createdAt)
+    public function __construct(ProductId $productId, $barcode, $name, $imageUrl, $brand, \DateTimeImmutable $createdAt)
     {
         $this->productId = $productId;
         $this->barcode = $barcode;

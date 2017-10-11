@@ -3,6 +3,7 @@
 namespace Shop\Product\Event;
 
 use Broadway\Serializer\Serializable;
+use Shop\Product\ValueObject\ProductId;
 
 class ProductCreated implements Serializable
 {
@@ -28,7 +29,7 @@ class ProductCreated implements Serializable
      * @param \DateTimeImmutable $createdAt
      */
     public function __construct(
-        $productId,
+        ProductId $productId,
         string $barcode,
         string $name,
         string $imageUrl,
@@ -96,7 +97,7 @@ class ProductCreated implements Serializable
     public static function deserialize(array $data)
     {
         return new self(
-            $data['productId'],
+            new ProductId($data['productId']),
             $data['barcode'],
             $data['name'],
             $data['imageUrl'],
@@ -111,7 +112,7 @@ class ProductCreated implements Serializable
     public function serialize()
     {
         return [
-            'productId' => $this->productId,
+            'productId' => (string)$this->productId,
             'name'      => $this->name,
             'barcode'   => $this->barcode,
             'imageUrl'  => $this->imageUrl,
