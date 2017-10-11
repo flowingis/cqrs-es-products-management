@@ -1,0 +1,18 @@
+---
+- hosts: development
+
+  user: vagrant
+
+  vars:
+    - synced_folder: "{{ synced_folder }}"
+    - host: "{{ host }}"
+
+  gather_facts: yes
+
+  roles:
+    - ideato.common
+    - ideato.webserver
+    - ideato.database.mysql
+    - ideato.elasticsearch
+
+  become: True

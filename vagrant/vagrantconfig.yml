@@ -1,0 +1,7 @@
+ram:           2048
+cpus:          2
+ipaddress:     10.10.10.10
+name:          cqrs-es-ws
+synced_folder: "/var/www"
+hosts:
+  - api.cqrsws.dev

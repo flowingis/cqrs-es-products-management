@@ -1,0 +1,72 @@
+{
+  "name": "broadway/broadway-bundle",
+  "description": "Symfony bundle for broadway/broadway.",
+  "keywords": [
+    "cqrs",
+    "event sourcing",
+    "domain-driven design",
+    "ddd"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=5.5.9",
+    "broadway/broadway": "^1.0",
+    "doctrine/doctrine-bundle": "^1.0",
+    "symfony/console": "^2.3|^3.0",
+    "symfony/http-kernel": "^2.3|^3.0"
+  },
+  "authors": [
+    {
+      "name": "Alexander",
+      "email": "iam.asm89@gmail.com"
+    },
+    {
+      "name": "Emil",
+      "email": "emil@broekmeulen.com"
+    },
+    {
+      "name": "Fritsjan",
+      "email": "fritsjan@qandidate.com"
+    },
+    {
+      "name": "othillo",
+      "email": "othillo@othillo.nl"
+    },
+    {
+      "name": "Willem-Jan",
+      "email": "wjzijderveld@gmail.com"
+    },
+    {
+      "name": "Qandidate.com",
+      "homepage": "http://labs.qandidate.com/"
+    }
+  ],
+  "require-dev": {
+    "broadway/event-store-dbal": "^0.1",
+    "elasticsearch/elasticsearch": "~1.0|^2.0",
+    "instaclick/base-test-bundle": "~0.5",
+    "monolog/monolog": "~1.8",
+    "symfony/proxy-manager-bridge": "~2.4",
+    "phpunit/phpunit": "^4.8",
+    "matthiasnoback/symfony-config-test": "^2.0",
+    "matthiasnoback/symfony-dependency-injection-test": "^1.1"
+  },
+  "suggest": {
+    "psr/log-implementation": "Implementation for PSR3, LoggerInterface"
+  },
+  "autoload": {
+    "psr-4": {
+      "Broadway\\Bundle\\BroadwayBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Broadway\\Bundle\\BroadwayBundle\\": "test/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.3.x-dev"
+    }
+  }
+}

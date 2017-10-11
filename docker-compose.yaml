@@ -1,0 +1,38 @@
+version: '2'
+services:
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=dev
+      - MYSQL_USER=ideato
+      - MYSQL_PASSWORD=ideato
+      - MYSQL_DATABASE=cqrs
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - 8080:80
+    links:
+      - php:php
+    volumes:
+      - ./www:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    working_dir: /var/www
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
+  php:
+    volumes:
+      - ./www:/var/www
+    depends_on:
+      - mysql
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
