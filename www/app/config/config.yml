@@ -7,7 +7,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    read_model_index_products: 'products'
+#    read_model_index_products: 'products'
 
 framework:
     #esi: ~
@@ -73,7 +73,7 @@ broadway:
   event_store:
     dbal:
       enabled: true
-  read_model:
-    repository: elasticsearch
-    elasticsearch:
-      hosts: 'localhost:9200'
+#  read_model:
+#    repository: elasticsearch
+#    elasticsearch:
+#      hosts: 'localhost:9200'

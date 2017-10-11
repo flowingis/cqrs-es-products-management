@@ -2,18 +2,45 @@
 namespace Tests\Shop\Command;
 
 use Broadway\CommandHandling\CommandHandler;
+use Broadway\CommandHandling\Testing\CommandHandlerScenarioTestCase;
 use Broadway\EventHandling\EventBus;
 use Broadway\EventStore\EventStore;
+use Shop\Product\Command\CreateProduct;
+use Shop\Product\Event\ProductCreated;
+use Shop\Product\ProductCommandHandler;
 use Shop\Product\Repository;
 
-class CreateProductTest extends \Broadway\CommandHandling\Testing\CommandHandlerScenarioTestCase
+class CreateProductTest extends CommandHandlerScenarioTestCase
 {
     /**
      * @test
      */
     public function should_create_a_product()
     {
-        
+        $createProduct = new CreateProduct(
+            '00000000-0000-0000-0000-000000000321',
+            '5707055029608',
+            'Nome prodotto: Scaaarpe',
+            'http://static.politifact.com.s3.amazonaws.com/subjects/mugs/fake.png',
+            'Brand prodotto: Super Scaaaarpe',
+            new \DateTimeImmutable('2017-02-14')
+        );
+
+        $this->scenario
+            ->given([])
+            ->when($createProduct)
+            ->then(
+                [
+                    new ProductCreated(
+                        $createProduct->getProductId(),
+                        $createProduct->getBarcode(),
+                        $createProduct->getName(),
+                        $createProduct->getImageurl(),
+                        $createProduct->getBrand(),
+                        $createProduct->getCreatedAt()
+                    )
+                ]
+            );
     }
 
     /**
@@ -28,6 +55,6 @@ class CreateProductTest extends \Broadway\CommandHandling\Testing\CommandHandler
     {
         $repository = new Repository($eventStore, $eventBus);
 
-//        return new ProductCommandHandler($repository);
+        return new ProductCommandHandler($repository);
     }
 }

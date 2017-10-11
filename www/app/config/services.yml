@@ -51,10 +51,6 @@ services:
 #            - { name: broadway.domain.event_listener }
 #
 #    shop.product.read_model.repository:
-#        class: Broadway\ReadModel\ElasticSearch\ElasticSearchRepository
-#        arguments:
-#           - "@broadway.elasticsearch.client"
-#           - "@broadway.simple_interface_serializer"
-#           - "%read_model_index_products%"
-#           - Shop\Product\ReadModel\Product
+#        class: Shop\Product\ReadModel\ProductRepository
+#        arguments: ['@doctrine.dbal.default_connection']
 #        public: true

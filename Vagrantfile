@@ -12,7 +12,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_check_update = false
-  config.vm.box = "new-cqrs-es-ws"
+  config.vm.box = "cqrs-es-ws"
   config.vm.hostname = CONF["name"]
   config.vm.network "private_network", ip: CONF["ipaddress"]
 

@@ -4,4 +4,5 @@ ipaddress:     10.10.10.10
 name:          cqrs-es-ws
 synced_folder: "/var/www"
 hosts:
-  - api.cqrsws.dev
+  - api.cqrsws.lo
+  - db.cqrsws.lo

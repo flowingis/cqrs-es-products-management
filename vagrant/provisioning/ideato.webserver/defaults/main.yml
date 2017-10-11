@@ -1,4 +1,4 @@
-backend_server_name_virtual_host: api.cqrsws.dev
+backend_server_name_virtual_host: api.cqrsws.lo
 backend_application_root_dir: /var/www/web
 
 ws_vhost_path: /etc/nginx/conf.d
