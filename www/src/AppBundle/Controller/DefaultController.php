@@ -6,6 +6,7 @@ use Broadway\UuidGenerator\Rfc4122\Version4Generator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shop\Product\Command\CreateProduct;
+use Shop\Product\ReadModel\Product;
 use Shop\Product\ValueObject\ProductId;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,5 +35,17 @@ class DefaultController extends Controller
         $this->get('broadway.command_handling.simple_command_bus')->dispatch($createProduct);
 
         return new JsonResponse(['product_id' => (string)$productId], 201);
+    }
+
+    /**
+     * @Route("products/{id}", name="get_product")
+     * @Method({"GET"})
+     */
+    public function getAction(Request $request)
+    {
+        /** @var Product $productReadModel */
+        $productReadModel = $this->get('shop.product.read_model.repository')->find(new ProductId($request->get('id')));
+
+        return new JsonResponse($productReadModel->serialize());
     }
 }

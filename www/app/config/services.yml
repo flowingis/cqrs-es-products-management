@@ -43,14 +43,14 @@ services:
     shop.product.repository:
         class: Shop\Product\Repository
         arguments: ['@broadway.event_store.dbal', '@broadway.event_handling.event_bus']
-#
-#    shop.product.read_model.projector:
-#        class: Shop\Product\Projector\ProductProjector
-#        arguments: ['@shop.product.read_model.repository']
-#        tags:
-#            - { name: broadway.domain.event_listener }
-#
-#    shop.product.read_model.repository:
-#        class: Shop\Product\ReadModel\ProductRepository
-#        arguments: ['@doctrine.dbal.default_connection']
-#        public: true
+
+    shop.product.read_model.projector:
+        class: Shop\Product\Projector\ProductProjector
+        arguments: ['@shop.product.read_model.repository']
+        tags:
+            - { name: broadway.domain.event_listener }
+
+    shop.product.read_model.repository:
+        class: Shop\Product\ReadModel\ProductRepository
+        arguments: ['@doctrine.dbal.default_connection']
+        public: true
