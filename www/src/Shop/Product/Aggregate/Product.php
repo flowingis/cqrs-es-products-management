@@ -8,6 +8,8 @@ use Shop\Product\Event\ProductCreated;
 
 class Product extends EventSourcedAggregateRoot
 {
+    private $id;
+
     public static function create(CreateProduct $command)
     {
         $product = new self();
@@ -25,11 +27,16 @@ class Product extends EventSourcedAggregateRoot
         return $product;
     }
 
+    protected function applyProductCreated(ProductCreated $event)
+    {
+        $this->id = $event->getProductId();
+    }
+
     /**
      * @return string
      */
     public function getAggregateRootId()
     {
-        // TODO: Implement getAggregateRootId() method.
+        return $this->id;
     }
 }

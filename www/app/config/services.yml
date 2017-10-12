@@ -34,15 +34,15 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-#    shop.product.command_handler:
-#        class: Shop\Product\ProductCommandHandler
-#        arguments: ['@shop.product.repository']
-#        tags:
-#            - { name: broadway.command_handler }
-#
-#    shop.product.repository:
-#        class: Shop\Product\Repository
-#        arguments: ['@broadway.event_store.dbal', '@broadway.event_handling.event_bus']
+    shop.product.command_handler:
+        class: Shop\Product\ProductCommandHandler
+        arguments: ['@shop.product.repository']
+        tags:
+            - { name: broadway.command_handler }
+
+    shop.product.repository:
+        class: Shop\Product\Repository
+        arguments: ['@broadway.event_store.dbal', '@broadway.event_handling.event_bus']
 #
 #    shop.product.read_model.projector:
 #        class: Shop\Product\Projector\ProductProjector
