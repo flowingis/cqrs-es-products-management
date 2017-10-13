@@ -6,6 +6,7 @@ namespace Shop\Product;
 use Broadway\CommandHandling\SimpleCommandHandler;
 use Shop\Product\Aggregate\Product;
 use Shop\Product\Command\CreateProduct;
+use Shop\Product\Command\DeleteProduct;
 use Shop\Product\Command\UpdateProduct;
 
 class ProductCommandHandler extends SimpleCommandHandler
@@ -33,6 +34,16 @@ class ProductCommandHandler extends SimpleCommandHandler
         $product = $this->repository->load($command->getProductId());
 
         $product->update($command);
+
+        $this->repository->save($product);
+    }
+
+    public function handleDeleteProduct(DeleteProduct $command)
+    {
+        /** @var Product $product */
+        $product = $this->repository->load($command->getProductId());
+
+        $product->delete($command);
 
         $this->repository->save($product);
     }

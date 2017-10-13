@@ -74,6 +74,6 @@ class ProductRepository implements Repository
      */
     public function remove($id)
     {
-        // TODO: Implement remove() method.
+        $this->connection->delete('product', ['productId' => $id]);
     }
 }

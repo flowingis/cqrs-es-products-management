@@ -4,8 +4,10 @@ namespace Shop\Product\Aggregate;
 
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use Shop\Product\Command\CreateProduct;
+use Shop\Product\Command\DeleteProduct;
 use Shop\Product\Command\UpdateProduct;
 use Shop\Product\Event\ProductCreated;
+use Shop\Product\Event\ProductDeleted;
 use Shop\Product\Event\ProductUpdated;
 
 class Product extends EventSourcedAggregateRoot
@@ -39,6 +41,15 @@ class Product extends EventSourcedAggregateRoot
             $command->getBrand(),
             $command->getCreatedAt()
         ));
+    }
+
+    public function delete(DeleteProduct $command)
+    {
+        $this->apply(new ProductDeleted(
+            $command->getProductId(),
+            $command->getDeletedAt()
+            )
+        );
     }
 
     protected function applyProductCreated(ProductCreated $event)

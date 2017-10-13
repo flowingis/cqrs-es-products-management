@@ -5,6 +5,7 @@ namespace Shop\Product\Projector;
 use Broadway\ReadModel\Projector;
 use Broadway\ReadModel\Repository;
 use Shop\Product\Event\ProductCreated;
+use Shop\Product\Event\ProductDeleted;
 use Shop\Product\Event\ProductUpdated;
 use Shop\Product\ReadModel\Product;
 
@@ -43,5 +44,13 @@ class ProductProjector extends Projector
         $product->setUpdatedAt($event->getCreatedAt());
 
         $this->repository->save($product);
+    }
+
+    protected function applyProductDeleted(ProductDeleted $event)
+    {
+        /** @var Product $product */
+        $product = $this->repository->find($event->getProductId());
+
+        $this->repository->remove((string)$product->getId());
     }
 }
