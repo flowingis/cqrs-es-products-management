@@ -44,6 +44,11 @@ class Product implements Identifiable, Serializable
     private $createdAt;
 
     /**
+     * @var \DateTimeImmutable
+     */
+    private $updatedAt;
+
+    /**
      * @return string
      */
     public function getId()
@@ -97,6 +102,22 @@ class Product implements Identifiable, Serializable
     public function setCreatedAt(\DateTimeImmutable $createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @param \DateTimeImmutable $updatedAt
+     */
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 
     /**
@@ -161,6 +182,10 @@ class Product implements Identifiable, Serializable
         $product->setBrand($data['brand']);
         $product->setCreatedAt(new \DateTimeImmutable($data['createdAt']));
 
+        if (isset($data['updatedAt'])) {
+            $product->setUpdatedAt(new \DateTimeImmutable($data['updatedAt']));
+        }
+
         return $product;
     }
 
@@ -175,7 +200,8 @@ class Product implements Identifiable, Serializable
             'name' => $this->name,
             'imageUrl' => $this->imageUrl,
             'brand' => $this->brand,
-            'createdAt' => $this->createdAt->format('Y-m-d\TH:i:s.uP')
+            'createdAt' => $this->createdAt->format('Y-m-d\TH:i:s.uP'),
+            'updatedAt' => $this->updatedAt ? $this->updatedAt->format('Y-m-d\TH:i:s.uP') : null,
         ];
     }
 }

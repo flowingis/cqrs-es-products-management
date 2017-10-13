@@ -21,6 +21,16 @@ class ProductRepository implements Repository
     public function save(Identifiable $product)
     {
         $serialized = $product->serialize();
+        if ($product->getUpdatedAt()) {
+            $this->connection->update(
+                'product',
+                $serialized,
+                ['productId' => (string)$product->getId()]
+            );
+
+            return;
+        }
+
         $this->connection->insert('product', $serialized);
     }
 

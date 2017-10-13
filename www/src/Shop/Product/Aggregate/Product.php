@@ -4,7 +4,9 @@ namespace Shop\Product\Aggregate;
 
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use Shop\Product\Command\CreateProduct;
+use Shop\Product\Command\UpdateProduct;
 use Shop\Product\Event\ProductCreated;
+use Shop\Product\Event\ProductUpdated;
 
 class Product extends EventSourcedAggregateRoot
 {
@@ -25,6 +27,18 @@ class Product extends EventSourcedAggregateRoot
         );
 
         return $product;
+    }
+
+    public function update(UpdateProduct $command)
+    {
+        $this->apply(new ProductUpdated(
+            $command->getProductId(),
+            $command->getBarcode(),
+            $command->getName(),
+            $command->getImageurl(),
+            $command->getBrand(),
+            $command->getCreatedAt()
+        ));
     }
 
     protected function applyProductCreated(ProductCreated $event)

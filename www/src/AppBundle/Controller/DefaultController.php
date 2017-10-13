@@ -6,6 +6,7 @@ use Broadway\UuidGenerator\Rfc4122\Version4Generator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shop\Product\Command\CreateProduct;
+use Shop\Product\Command\UpdateProduct;
 use Shop\Product\ReadModel\Product;
 use Shop\Product\ValueObject\ProductId;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -47,5 +48,26 @@ class DefaultController extends Controller
         $productReadModel = $this->get('shop.product.read_model.repository')->find(new ProductId($request->get('id')));
 
         return new JsonResponse($productReadModel->serialize());
+    }
+
+    /**
+     * @Route("/products/{id}", name="update_product")
+     * @Method({"PUT"})
+     */
+    public function updateAction(Request $request)
+    {
+        $productId = new ProductId($request->get('id'));
+        $updateProduct = new UpdateProduct(
+            $productId,
+            '5707055029609',
+            'Nome prodotto: Scaaarpe più belle',
+            'http://static.politifact.com.s3.amazonaws.com/subjects/mugs/fake1.png',
+            'Brand prodotto: Super Scaaaarpe più belle',
+            new \DateTimeImmutable()
+        );
+
+        $this->get('broadway.command_handling.simple_command_bus')->dispatch($updateProduct);
+
+        return new JsonResponse($this->generateUrl('get_product', ['id' => (string)$productId]), 204);
     }
 }

@@ -7,16 +7,16 @@ use Shop\Product\ValueObject\ProductId;
 
 class ProductCreated implements Serializable
 {
-    private $productId;
-    private $barcode;
+    protected $productId;
+    protected $barcode;
     /**
      * @var string
      */
-    private $name;
-    private $imageUrl;
-    private $brand;
+    protected $name;
+    protected $imageUrl;
+    protected $brand;
 
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * ProductCreated constructor.
