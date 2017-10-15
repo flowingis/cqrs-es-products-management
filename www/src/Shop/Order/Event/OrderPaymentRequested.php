@@ -23,6 +23,30 @@ class OrderPaymentRequested implements Serializable
     }
 
     /**
+     * @return OrderId
+     */
+    public function getOrderId()
+    {
+        return $this->orderId;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getRequestedAt()
+    {
+        return $this->requestedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotalCost()
+    {
+        return $this->totalCost;
+    }
+
+    /**
      * @return mixed The object instance
      */
     public static function deserialize(array $data)
