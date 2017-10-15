@@ -28,6 +28,22 @@ class OrderCreated implements Serializable
     }
 
     /**
+     * @return OrderId
+     */
+    public function getOrderId(): OrderId
+    {
+        return $this->orderId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotalCost()
+    {
+        return $this->totalCost;
+    }
+
+    /**
      * @return mixed The object instance
      */
     public static function deserialize(array $data)
